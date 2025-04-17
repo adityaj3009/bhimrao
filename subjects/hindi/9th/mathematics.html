@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #4361ee;
+            --primary-purple: #7209b7;
+            --text-dark: #2b2d42;
+            --text-light: #64748b;
+            --background: #f8f9fa;
+            --card: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .download-container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .file-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-blue {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #3a56d4 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-purple {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, #5a189a 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(114, 9, 183, 0.3);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .file-info {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--text-light);
+            font-size: 12px;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="download-container">
+        <div class="file-icon">
+            <i class="far fa-file-pdf"></i>
+        </div>
+        <h2>Study Materials</h2>
+        <p>Download the PDF documents for your reference</p>
+        
+        <div class="download-options">
+            <a href="https://ebooks.ebalbharati.in/pdfs/902000608.pdf" class="download-btn btn-blue" download>
+                <i class="fas fa-download"></i>
+                <div>
+                    <div>Maths 1</div>
+                </div>
+            </a>
+            
+            <div class="divider">OR</div>
+            
+            <a href="https://ebooks.ebalbharati.in/pdfs/902000609.pdf" class="download-btn btn-purple" download>
+                <i class="fas fa-download"></i>
+                <div>
+                    <div>Maths 2</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

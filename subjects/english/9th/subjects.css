@@ -1,0 +1,133 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 15px;
+    color: #333;
+}
+.chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.chapter-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.chapter-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.chapter-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+.chapter-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.chapter-info {
+    padding: 15px;
+}
+.chapter-title {
+    margin: 0 0 12px 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+}
+.chapter-info h3 {
+    color: #3498db;
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+.chapter-info p {
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+.chapter-info ul {
+    padding-left: 18px;
+    margin: 0;
+}
+.chapter-info li {
+    margin-bottom: 6px;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+.header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+.header p {
+    color: #7f8c8d;
+    font-size: 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chapters-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+    }
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    .header p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .chapters-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .header h1 {
+        font-size: 1.6rem;
+    }
+    .header p {
+        font-size: 0.9rem;
+    }
+    .chapter-title {
+        font-size: 1.2rem;
+    }
+    .chapter-info h3 {
+        font-size: 1rem;
+    }
+    .chapter-info {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    .chapter-title {
+        font-size: 1.1rem;
+    }
+    .chapter-info p, .chapter-info li {
+        font-size: 0.85rem;
+    }
+}

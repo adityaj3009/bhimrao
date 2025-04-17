@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASOOM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="icons/logo-new-1.png" type="image/x-icon">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #3e8e41;
+            --primary-light: #81c784;
+            --accent-color: #ff7043;
+            --text-light: #ffffff;
+            --text-dark: #212121;
+            --transition-speed: 0.4s;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+            background-size: cover;
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 30px;
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto;
+            perspective: 1000px;
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(90deg, #ffffff, #b3e5fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease-in-out;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+            letter-spacing: 1px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
+            color: white;
+            min-width: 180px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease-in-out 1s forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary-color));
+        }
+
+        .btn:active {
+            transform: translateY(-3px);
+        }
+
+        .btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Section Containers */
+        .section-container {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* Standard Selection Section */
+        .standards-container {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-in-out;
+            transform: rotateX(5deg);
+            opacity: 0;
+        }
+
+        .standards-container.active {
+            transform: rotateX(0);
+            opacity: 1;
+        }
+
+        .standards-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .standards-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 2.5rem;
+        }
+
+        .standard-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .standard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--primary-color);
+            transition: height 0.4s ease;
+        }
+
+        .standard-card:hover::before {
+            height: 100%;
+        }
+
+        .standard-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .standard-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+            transition: all 0.4s ease;
+        }
+
+        .standard-card:hover i {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+
+        .standard-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .standard-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        /* Subjects Container */
+        .subjects-container {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeInRight 1s ease-in-out;
+        }
+
+        .subjects-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            position: relative;
+            display: inline-block;
+        }
+
+        .subjects-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.4s ease-in-out forwards;
+        }
+
+        .subject-card:nth-child(1) { animation-delay: 0.1s; }
+        .subject-card:nth-child(2) { animation-delay: 0.2s; }
+        .subject-card:nth-child(3) { animation-delay: 0.3s; }
+        .subject-card:nth-child(4) { animation-delay: 0.4s; }
+        .subject-card:nth-child(5) { animation-delay: 0.5s; }
+        .subject-card:nth-child(6) { animation-delay: 0.6s; }
+        .subject-card:nth-child(7) { animation-delay: 0.7s; }
+
+        .subject-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .subject-card:hover::after {
+            width: 80%;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .subject-card i {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover i {
+            transform: scale(1.15);
+            color: var(--accent-color);
+        }
+
+        .subject-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .subject-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Back Button */
+        .back-btn {
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .back-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .page-transition-enter {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        .page-transition-enter-active {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 500ms, transform 500ms;
+        }
+
+        .page-transition-exit {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .page-transition-exit-active {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 500ms, transform 500ms;
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .standards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+
+            .btn {
+                padding: 14px 26px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content {
+                padding: 20px 15px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+
+            .standards-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .standard-card {
+                padding: 20px 15px;
+            }
+
+            .standard-card i {
+                font-size: 2.2rem;
+                margin-bottom: 12px;
+            }
+
+            .standard-card h3 {
+                font-size: 1.3rem;
+                margin-bottom: 8px;
+            }
+
+            .standards-title, .subjects-title {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-container {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="page-loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Language Selection Section -->
+        <div id="language-selection" class="section-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>MASOOM</h1>
+            </div>
+            <p class="subtitle">Building a better learning experience for every student</p>
+            <div class="buttons">
+                <button class="btn" onclick="selectLanguage('english')">
+                    <i class="fas fa-language"></i> English
+                </button>
+                <button class="btn" onclick="selectLanguage('hindi')">
+                    <i class="fas fa-language"></i> Hindi
+                </button>
+                <button class="btn" onclick="selectLanguage('marathi')">
+                    <img src="icons/shivaji.svg" alt="Marathi Icon" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 8px;">
+                    Marathi
+                </button>
+            </div>
+        </div>
+
+        <!-- Standard Selection Section -->
+        <div id="standards-container" class="standards-container section-container">
+            <h2 class="standards-title">Select Your Standard</h2>
+            <div class="standards-grid">
+                <div class="standard-card" onclick="selectStandard('8th')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>8th Standard</h3>
+                    <p>Begin your learning journey</p>
+                </div>
+                <div class="standard-card" onclick="selectStandard('9th')">
+                    <i class="fas fa-book-open"></i>
+                    <h3>9th Standard</h3>
+                    <p>Build your knowledge</p>
+                </div>
+                <div class="standard-card" onclick="selectStandard('10th')">
+                    <i class="fas fa-award"></i>
+                    <h3>10th Standard</h3>
+                    <p>Prepare for success</p>
+                </div>
+            </div>
+            <button class="back-btn" onclick="backToLanguageSelection()">
+                <i class="fas fa-arrow-left"></i> Back to Language Selection
+            </button>
+        </div>
+
+        <!-- Subjects Selection Section -->
+        <div id="subjects-container" class="subjects-container section-container">
+            <h2 class="subjects-title" id="subjects-title">Subjects for <span id="standard-display"></span></h2>
+            <div class="subjects-grid" id="subjects-grid">
+                <!-- Subjects will be dynamically inserted here -->
+            </div>
+            <button class="back-btn" onclick="backToStandardSelection()">
+                <i class="fas fa-arrow-left"></i> Back to Standard Selection
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Current selected language
+        let currentLanguage = '';
+        
+        // Show loader function
+        function showLoader() {
+            document.getElementById('page-loader').style.display = 'flex';
+        }
+        
+        // Hide loader function
+        function hideLoader() {
+            document.getElementById('page-loader').style.display = 'none';
+        }
+        
+        // Language selection
+        function selectLanguage(lang) {
+            showLoader();
+            
+            // Store the language selection
+            currentLanguage = lang;
+            
+            // Simulate loading (for transition effect)
+            setTimeout(() => {
+                document.getElementById('language-selection').style.display = 'none';
+                const standardsContainer = document.getElementById('standards-container');
+                standardsContainer.style.display = 'block';
+                
+                // Add transition class for animation
+                setTimeout(() => {
+                    standardsContainer.classList.add('active');
+                    hideLoader();
+                }, 100);
+                
+                console.log('Selected language:', lang);
+            }, 500);
+        }
+
+        // Standard selection
+        function selectStandard(std) {
+            showLoader();
+            
+            setTimeout(() => {
+                document.getElementById('standards-container').style.display = 'none';
+                document.getElementById('subjects-container').style.display = 'block';
+                document.getElementById('standard-display').textContent = std;
+                
+                // Clear previous subjects
+                const subjectsGrid = document.getElementById('subjects-grid');
+                subjectsGrid.innerHTML = '';
+                
+                // Add subjects based on standard
+                const subjects = getSubjectsForStandard(std);
+                
+                subjects.forEach(subject => {
+                    const subjectCard = document.createElement('div');
+                    subjectCard.className = 'subject-card';
+                    subjectCard.onclick = function() {
+                        openSubjectPage(std, subject.name, currentLanguage);
+                    };
+                    
+                    subjectCard.innerHTML = `
+                        <i class="${subject.icon}"></i>
+                        <h4>${subject.name}</h4>
+                        <p>${subject.desc}</p>
+                    `;
+                    
+                    subjectsGrid.appendChild(subjectCard);
+                });
+                
+                hideLoader();
+            }, 500);
+        }
+
+        // Back to language selection
+        function backToLanguageSelection() {
+            showLoader();
+            
+            setTimeout(() => {
+                document.getElementById('standards-container').style.display = 'none';
+                document.getElementById('language-selection').style.display = 'block';
+                hideLoader();
+            }, 300);
+        }
+
+        // Back to standard selection
+        function backToStandardSelection() {
+            showLoader();
+            
+            setTimeout(() => {
+                document.getElementById('subjects-container').style.display = 'none';
+                const standardsContainer = document.getElementById('standards-container');
+                standardsContainer.style.display = 'block';
+                standardsContainer.classList.add('active');
+                hideLoader();
+            }, 300);
+        }
+
+        // Open subject page based on language, standard and subject
+        function openSubjectPage(std, subject, language) {
+    const subjectSlug = subject.toLowerCase().replace(' ', '-');
+    // Create a path to the specific language/standard/subject HTML file
+    const url = `subjects/${language}/${std}/${subjectSlug}.html`;
+    console.log(`Opening ${url} - Language: ${language}, Standard: ${std}, Subject: ${subject}`);
+    window.open(url, '_blank');
+}
+
+        // Get subjects for selected standard
+        function getSubjectsForStandard(std) {
+            const subjects = {
+                '8th': [
+                    { name: 'English', icon: 'fas fa-book', desc: 'Language and literature' },
+                    { name: 'Mathematics', icon: 'fas fa-square-root-alt', desc: 'Numbers and algebra' },
+                    { name: 'Science', icon: 'fas fa-flask', desc: 'Physics, Chemistry, Biology' },
+                    { name: 'Social Studies', icon: 'fas fa-globe-asia', desc: 'History and Geography' },
+                    { name: 'Hindi', icon: 'fas fa-language', desc: 'Second language' },
+                    { name: 'Marathi', icon: 'fas fa-language', desc: 'Third language' }
+                ],
+                '9th': [
+                    { name: 'English', icon: 'fas fa-book', desc: 'Advanced literature' },
+                    { name: 'Mathematics', icon: 'fas fa-calculator', desc: 'Algebra and Geometry' },
+                    { name: 'Physics', icon: 'fas fa-atom', desc: 'Fundamental physics' },
+                    { name: 'Chemistry', icon: 'fas fa-vial', desc: 'Chemical reactions' },
+                    { name: 'Biology', icon: 'fas fa-dna', desc: 'Life sciences' },
+                    { name: 'History', icon: 'fas fa-landmark', desc: 'World history' },
+                    { name: 'Geography', icon: 'fas fa-map-marked-alt', desc: 'Physical geography' }
+                ],
+                '10th': [
+                    { name: 'English', icon: 'fas fa-book', desc: 'Board exam preparation' },
+                    { name: 'Mathematics', icon: 'fas fa-calculator', desc: 'Advanced concepts' },
+                    { name: 'Science', icon: 'fas fa-flask', desc: 'Physics, Chemistry, Biology' },
+                    { name: 'Social Science', icon: 'fas fa-globe', desc: 'History, Geography, Civics' },
+                    {name: 'Hindi', icon: 'fas fa-language', desc: 'Second language' },
+                    { name: 'Marathi', icon: 'fas fa-language', desc: 'Third language' }
+            ]
+            
+            };
+            
+            return subjects[std] || [];
+        }
+
+        // Add page transition animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial animation for the language selection section
+            const languageSection = document.getElementById('language-selection');
+            setTimeout(() => {
+                languageSection.style.opacity = '1';
+                languageSection.style.transform = 'translateY(0)';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
